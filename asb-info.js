@@ -24,7 +24,8 @@
     priceAcceleree: "1 690",
     hoursWeek: "10h00 - 12h00 · 14h00 - 19h00",
     hoursSat: "10h00 - 14h00",
-    hoursSun: "Fermé"
+    hoursSun: "Fermé",
+    appsScriptUrl: ""
   };
 
   let currentInfo = Object.assign({}, defaults);

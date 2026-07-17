@@ -139,4 +139,73 @@
     threshold: 0
   });
   sections.forEach(section => spyObserver.observe(section));
+
+  // --- Registration Form Submission (Google Sheets Integration) ---
+  const regForm = document.getElementById('registration-form');
+  const regStatus = document.getElementById('form-status');
+  const regSubmitBtn = document.getElementById('form-submit-btn');
+  const regOkDiv = document.getElementById('form-ok');
+
+  if (regForm) {
+    regForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Clear status
+      if (regStatus) {
+        regStatus.style.display = 'none';
+        regStatus.textContent = '';
+        regStatus.style.color = '';
+      }
+
+      // Check Apps Script endpoint
+      const appsScriptUrl = window.asbInfo ? window.asbInfo.get().appsScriptUrl : '';
+      if (!appsScriptUrl) {
+        if (regStatus) {
+          regStatus.style.display = 'block';
+          regStatus.textContent = "⚠️ Veuillez configurer l'URL Apps Script dans le panneau d'édition (Ctrl+M > Infos École > Google Sheet).";
+          regStatus.style.color = '#ff4d4d';
+        }
+        return;
+      }
+
+      // Disable submit button
+      if (regSubmitBtn) {
+        regSubmitBtn.disabled = true;
+        regSubmitBtn.textContent = 'Envoi en cours…';
+      }
+
+      const formData = new FormData();
+      formData.append('prenom', document.getElementById('prenom').value.trim());
+      formData.append('nom', document.getElementById('nom').value.trim());
+      formData.append('email', document.getElementById('email').value.trim());
+      formData.append('tel', document.getElementById('tel').value.trim());
+      formData.append('permis', document.getElementById('permis').value);
+      formData.append('msg', document.getElementById('msg').value.trim());
+
+      try {
+        await fetch(appsScriptUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: formData
+        });
+        
+        // Success: Hide form and show success message
+        regForm.style.display = 'none';
+        if (regOkDiv) {
+          regOkDiv.style.display = 'block';
+        }
+      } catch (err) {
+        console.error('Submission error:', err);
+        if (regSubmitBtn) {
+          regSubmitBtn.disabled = false;
+          regSubmitBtn.innerHTML = 'Envoyer ma demande <svg class="arr" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+        }
+        if (regStatus) {
+          regStatus.style.display = 'block';
+          regStatus.textContent = "⚠️ Une erreur s'est produite lors de l'envoi. Veuillez réessayer.";
+          regStatus.style.color = '#ff4d4d';
+        }
+      }
+    });
+  }
 })();

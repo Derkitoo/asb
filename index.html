@@ -336,7 +336,7 @@
       </div>
 
       <div class="form-card reveal" data-d="1">
-        <form onsubmit="event.preventDefault(); this.style.display='none'; document.getElementById('form-ok').style.display='block';">
+        <form id="registration-form">
           <div class="field-row">
             <div class="field"><label for="prenom">Prénom</label><input id="prenom" type="text" placeholder="Votre prénom" required></div>
             <div class="field"><label for="nom">Nom</label><input id="nom" type="text" placeholder="Votre nom" required></div>
@@ -359,9 +359,10 @@
             <label for="msg">Message (facultatif)</label>
             <textarea id="msg" rows="3" placeholder="Vos disponibilités, vos questions…"></textarea>
           </div>
-          <button type="submit" class="btn btn--primary" style="width:100%;">Envoyer ma demande
+          <button type="submit" class="btn btn--primary" id="form-submit-btn" style="width:100%;">Envoyer ma demande
             <svg class="arr" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg>
           </button>
+          <p id="form-status" style="margin-top: 14px; font-size: 14px; font-weight: 600; text-align: center; display: none;"></p>
           <p class="text-muted" style="font-size:13px;text-align:center;margin:16px 0 0;">En envoyant ce formulaire, vous acceptez d'être recontacté(e) par ASB.</p>
         </form>
         <div id="form-ok" style="display:none;text-align:center;padding:30px 10px;">

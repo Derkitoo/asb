@@ -203,6 +203,9 @@ function TweaksApp() {
           <TweakText label="Adresse" value={info.address || ""} onChange={v => updateInfo('address', v)} />
           <TweakText label="Adresse (court)" value={info.addressShort || ""} onChange={v => updateInfo('addressShort', v)} />
           
+          <TweakSection label="Google Sheet" />
+          <TweakText label="URL Apps Script" value={info.appsScriptUrl || ""} onChange={v => updateInfo('appsScriptUrl', v)} placeholder="https://script.google.com/macros/s/.../exec" />
+          
           <TweakSection label="Tarifs (€)" />
           <TweakText label="B Automatique (13h)" value={info.priceBAuto || ""} onChange={v => updateInfo('priceBAuto', v)} />
           <TweakText label="B Manuelle (20h)" value={info.priceBManual || ""} onChange={v => updateInfo('priceBManual', v)} />
