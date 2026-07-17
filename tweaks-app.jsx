@@ -210,11 +210,16 @@ function TweaksApp() {
           <TweakText label="Adresse (court)" value={info.addressShort || ""} onChange={v => updateInfo('addressShort', v)} />
           
           <TweakSection label="Tarifs (€)" />
-          <TweakText label="B Manuelle" value={info.priceBManual || ""} onChange={v => updateInfo('priceBManual', v)} />
-          <TweakText label="B Automatique" value={info.priceBAuto || ""} onChange={v => updateInfo('priceBAuto', v)} />
-          <TweakText label="Permis Moto A2" value={info.priceMoto || ""} onChange={v => updateInfo('priceMoto', v)} />
-          <TweakText label="Conduite Acc." value={info.priceAAC || ""} onChange={v => updateInfo('priceAAC', v)} />
-          <TweakText label="Passerelle Moto" value={info.pricePasserelle || ""} onChange={v => updateInfo('pricePasserelle', v)} />
+          <TweakText label="B Automatique (13h)" value={info.priceBAuto || ""} onChange={v => updateInfo('priceBAuto', v)} />
+          <TweakText label="B Manuelle (20h)" value={info.priceBManual || ""} onChange={v => updateInfo('priceBManual', v)} />
+          <TweakText label="B Manuelle (30h)" value={info.priceBManual30 || ""} onChange={v => updateInfo('priceBManual30', v)} />
+          <TweakText label="Conduite Acc. (AAC)" value={info.priceAAC || ""} onChange={v => updateInfo('priceAAC', v)} />
+          <TweakText label="Formation Accélérée" value={info.priceAcceleree || ""} onChange={v => updateInfo('priceAcceleree', v)} />
+          <TweakText label="Passerelle BEA → B" value={info.pricePasserelleBEA || ""} onChange={v => updateInfo('pricePasserelleBEA', v)} />
+          <TweakText label="Moto A1/A2 (20h)" value={info.priceMoto || ""} onChange={v => updateInfo('priceMoto', v)} />
+          <TweakText label="Moto A1/A2 (30h)" value={info.priceMoto30 || ""} onChange={v => updateInfo('priceMoto30', v)} />
+          <TweakText label="Passerelles Moto / AM" value={info.pricePasserelle || ""} onChange={v => updateInfo('pricePasserelle', v)} />
+          <TweakText label="Formation Post-Permis" value={info.pricePostPermis || ""} onChange={v => updateInfo('pricePostPermis', v)} />
 
           <TweakSection label="Horaires" />
           <TweakText label="Lun – Ven" value={info.hoursWeek || ""} onChange={v => updateInfo('hoursWeek', v)} />
