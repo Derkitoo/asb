@@ -68,6 +68,10 @@ body {
   overflow-x: hidden;
   animation: fadeInPage 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+main {
+  display: block;
+  padding-top: var(--nav-h);
+}
 
 ::selection { background: var(--accent); color: var(--on-accent); }
 
@@ -188,7 +192,7 @@ h1, h2, h3, h4 {
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(11,11,12,0.72);
+  background: rgba(11, 11, 12, 0.96);
   backdrop-filter: blur(16px) saturate(140%);
   border-bottom-color: var(--line);
 }
@@ -274,7 +278,7 @@ h1, h2, h3, h4 {
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
-  padding-top: calc(var(--nav-h) + clamp(36px, 7vw, 84px));
+  padding-top: clamp(24px, 4vw, 48px);
   padding-bottom: clamp(40px, 6vw, 80px);
   overflow: hidden;
 }
