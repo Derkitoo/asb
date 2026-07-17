@@ -25,6 +25,85 @@ function softA(hex, a) {
   return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
 }
 
+function readAndResizeImage(file, callback) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX_DIM = 1200;
+      const scale = Math.min(1, MAX_DIM / Math.max(img.width, img.height));
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const dataUrl = canvas.toDataURL('image/webp', 0.85);
+      callback(dataUrl);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function TweakImage({ label, slotId, defaultSrc }) {
+  const [imgUrl, setImgUrl] = React.useState('');
+  const fileInputRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const updatePreview = () => {
+      if (window.imageSlots) {
+        const slot = window.imageSlots.get(slotId);
+        setImgUrl(slot ? slot.u : defaultSrc);
+      }
+    };
+    updatePreview();
+    window.addEventListener('tweakchange', updatePreview);
+    window.addEventListener('imageslotchange', updatePreview);
+    return () => {
+      window.removeEventListener('tweakchange', updatePreview);
+      window.removeEventListener('imageslotchange', updatePreview);
+    };
+  }, [slotId, defaultSrc]);
+
+  const handleChange = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    readAndResizeImage(file, (dataUrl) => {
+      if (window.imageSlots) {
+        window.imageSlots.set(slotId, { u: dataUrl, s: 1, x: 0, y: 0 });
+        setImgUrl(dataUrl);
+        window.dispatchEvent(new CustomEvent('imageslotchange'));
+      }
+    });
+    e.target.value = '';
+  };
+
+  const handleClear = () => {
+    if (window.imageSlots) {
+      window.imageSlots.clear(slotId);
+      setImgUrl(defaultSrc);
+      window.dispatchEvent(new CustomEvent('imageslotchange'));
+    }
+  };
+
+  return (
+    <div className="twk-row" style={{ marginBottom: '10px' }}>
+      <div className="twk-lbl"><span>{label}</span></div>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: '4px' }}>
+        <img src={imgUrl} alt="" style={{ width: '36px', height: '36px', objectFit: 'cover', borderRadius: '4px', background: 'rgba(0,0,0,0.1)', border: '0.5px solid rgba(0,0,0,0.1)' }} />
+        <button type="button" className="twk-btn secondary" style={{ height: '24px', fontSize: '10.5px', flex: 1, padding: 0 }} onClick={() => fileInputRef.current.click()}>
+          Changer
+        </button>
+        <button type="button" className="twk-btn secondary" style={{ height: '24px', fontSize: '10.5px', padding: '0 8px' }} onClick={handleClear} title="Rétablir l'image par défaut">
+          ✕
+        </button>
+        <input type="file" ref={fileInputRef} accept="image/png, image/jpeg, image/webp" style={{ display: 'none' }} onChange={handleChange} />
+      </div>
+    </div>
+  );
+}
+
 function TweaksApp() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [activeTab, setActiveTab] = React.useState('design');
@@ -119,6 +198,11 @@ function TweaksApp() {
 
       {activeTab === 'infos' && (
         <>
+          <TweakSection label="Images du site" />
+          <TweakImage label="Photo Façade" slotId="hero-facade" defaultSrc="facade.jpg" />
+          <TweakImage label="Photo Leçon" slotId="why-photo" defaultSrc="lesson.jpg" />
+          <TweakImage label="Photo Permis Moto" slotId="moto-photo" defaultSrc="moto.jpg" />
+          
           <TweakSection label="Contact" />
           <TweakText label="Téléphone" value={info.phone || ""} onChange={v => updateInfo('phone', v)} />
           <TweakText label="Email" value={info.email || ""} onChange={v => updateInfo('email', v)} />

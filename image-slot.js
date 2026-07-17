@@ -132,6 +132,7 @@
     if (val) { slots[id] = val; tombstones.delete(id); }
     else { delete slots[id]; if (!loaded) tombstones.add(id); }
     subs.forEach((fn) => fn());
+    window.dispatchEvent(new CustomEvent('imageslotchange'));
     // A drop is rare + high-value — write immediately so nav-away can't lose
     // it. Gate on the initial read so we don't overwrite a sidecar we haven't
     // merged yet; the merge in load() keeps this change once the read lands.
@@ -636,6 +637,12 @@
       }
     }
   }
+
+  window.imageSlots = {
+    set: setSlot,
+    get: getSlot,
+    clear: (id) => setSlot(id, null)
+  };
 
   if (!customElements.get('image-slot')) {
     customElements.define('image-slot', ImageSlot);
