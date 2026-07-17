@@ -120,4 +120,23 @@
   // safety passes for late layout/fonts
   setTimeout(reveal, 120);
   setTimeout(reveal, 500);
+  // --- Scrollspy for floating nav links ---
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu nav a');
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          link.classList.toggle('active', href === `#${id}`);
+        });
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  });
+  sections.forEach(section => spyObserver.observe(section));
 })();

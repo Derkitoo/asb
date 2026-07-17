@@ -49,6 +49,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 
 @keyframes fadeInPage {
   from { opacity: 0; transform: translateY(6px); }
