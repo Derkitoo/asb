@@ -10,8 +10,8 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 
 const DIRECTIONS = {
   "Signal":   { accent: "#FFD60A", display: "Bricolage Grotesque", sharp: false },
-  "Asphalte": { accent: "#C8FF3D", display: "Space Grotesk",       sharp: true  },
-  "Ambre":    { accent: "#FF9E2C", display: "Archivo",             sharp: false },
+  "Asphalte": { accent: "#FFD60A", display: "Space Grotesk",       sharp: true  },
+  "Ambre":    { accent: "#FFD60A", display: "Archivo",             sharp: false },
 };
 
 function deepen(hex, amt) {
@@ -176,12 +176,6 @@ function TweaksApp() {
             onChange={applyDirection}
           />
           <TweakSection label="Personnaliser" />
-          <TweakColor
-            label="Accent"
-            value={t.accent}
-            options={["#FFD60A", "#C8FF3D", "#FF9E2C", "#FF5630"]}
-            onChange={(v) => setTweak({ accent: v, direction: "—" })}
-          />
           <TweakRadio
             label="Police titres"
             value={t.display}

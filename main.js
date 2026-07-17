@@ -18,6 +18,55 @@
     track.innerHTML += track.innerHTML;
   });
 
+  // --- FAQ fluid accordion ---
+  document.querySelectorAll('details.qa').forEach(el => {
+    const summary = el.querySelector('summary');
+    const body = el.querySelector('.qa-body');
+    if (!summary || !body) return;
+    let animating = false;
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (animating) return;
+      animating = true;
+
+      const isOpen = el.hasAttribute('open');
+      if (!isOpen) {
+        // Open
+        el.setAttribute('open', '');
+        const startH = summary.offsetHeight;
+        const endH = el.scrollHeight;
+        el.style.height = startH + 'px';
+        el.style.overflow = 'hidden';
+        const anim = el.animate({
+          height: [startH + 'px', endH + 'px']
+        }, { duration: 320, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+        
+        anim.onfinish = () => {
+          el.style.height = '';
+          el.style.overflow = '';
+          animating = false;
+        };
+      } else {
+        // Close
+        const startH = el.scrollHeight;
+        const endH = summary.offsetHeight;
+        el.style.height = startH + 'px';
+        el.style.overflow = 'hidden';
+        const anim = el.animate({
+          height: [startH + 'px', endH + 'px']
+        }, { duration: 280, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+        
+        anim.onfinish = () => {
+          el.removeAttribute('open');
+          el.style.height = '';
+          el.style.overflow = '';
+          animating = false;
+        };
+      }
+    });
+  });
+
   // --- Scroll reveal (rAF + scroll, robust everywhere) ---
   const items = Array.from(document.querySelectorAll('.reveal, .stat, [data-count]'));
   function commit(el) {
