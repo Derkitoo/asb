@@ -636,8 +636,7 @@ footer.site {
 .step h3 { font-size: 23px; margin-bottom: 8px; }
 .step p { margin: 0; color: var(--text-2); font-size: 15.5px; }
 
-/* ---------- Pricing table ---------- */
-.price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px,2vw,22px); }
+.price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(16px,2vw,22px); }
 .price {
   border: 1px solid var(--line);
   border-radius: var(--r-lg);

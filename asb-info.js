@@ -3,21 +3,27 @@
   const CACHE_KEY = 'asb-info-state';
   
   const defaults = {
-    phone: "01 43 60 00 00",
-    email: "inscription@asb-compagnie.fr",
-    address: "12 rue de Paris, 93260 Les Lilas",
-    addressShort: "12 rue de Paris, Les Lilas",
+    phone: "09 55 46 90 61",
+    phoneSecondary: "07 82 82 29 03",
+    email: "abs.compagnie@gmail.com",
+    address: "53 Bd du Général Leclerc de Hauteclocque - 93260 Les Lilas",
+    addressShort: "53 Bd du Général Leclerc, Les Lilas",
     successRate: "83",
     experienceYears: "8",
     studentsCount: "3000",
     rating: "4.9",
-    priceBManual: "1 190",
-    priceBAuto: "990",
+    priceBAuto: "790",
+    priceBManual: "950",
+    priceBManual30: "1 440",
+    priceAAC: "1 190",
     priceMoto: "790",
-    priceAAC: "1 290",
+    priceMoto30: "1 190",
     pricePasserelle: "290",
-    hoursWeek: "10h – 13h · 14h – 19h",
-    hoursSat: "10h – 17h",
+    pricePasserelleBEA: "450",
+    pricePostPermis: "150",
+    priceAcceleree: "1 690",
+    hoursWeek: "10h00 - 12h00 · 14h00 - 19h00",
+    hoursSat: "10h00 - 14h00",
     hoursSun: "Fermé"
   };
 
