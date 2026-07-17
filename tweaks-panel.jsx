@@ -280,7 +280,45 @@ function TweaksPanel({ title = 'Tweaks', children }) {
     window.addEventListener('mouseup', up);
   };
 
-  if (!isDev || !open) return null;
+  if (!isDev) return null;
+  if (!open) {
+    return (
+      <>
+        <style>{`
+          .twk-trigger-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #111112;
+            border: 2px solid #FFD60A;
+            color: #FFD60A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 99999;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+            transition: transform 0.2s ease, background 0.2s ease;
+          }
+          .twk-trigger-btn:hover {
+            transform: scale(1.08) rotate(30deg);
+            background: #1e1e20;
+          }
+        `}</style>
+        <button 
+          className="twk-trigger-btn" 
+          onClick={() => setOpen(true)} 
+          title="Modifier les informations (Mode dével.)"
+          aria-label="Ouvrir les réglages"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </>
+    );
+  }
   return (
     <>
       <style>{__TWEAKS_STYLE}</style>
