@@ -744,6 +744,7 @@ footer.site {
 @media (max-width: 720px) {
   body { font-size: 17px; }
   .nav-links { display: none; }
+  .nav-cta .btn { display: none; }
   .nav-burger { display: flex; }
   .formations { grid-template-columns: 1fr; }
   .reviews { grid-template-columns: 1fr; }
