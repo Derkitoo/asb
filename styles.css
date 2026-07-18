@@ -228,29 +228,48 @@ h1, h2, h3, h4 {
   font-weight: 800;
   letter-spacing: -0.03em;
 }
-.logo-mark {
-  width: 42px; height: 42px;
-  border-radius: 11px;
-  background: var(--accent);
-  color: var(--on-accent);
-  display: grid;
-  place-items: center;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 20px;
-  letter-spacing: -0.04em;
-  position: relative;
+.logo-monogram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin-right: 4px;
   flex: none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15);
 }
-.logo-mark::after {
-  content: "";
+.mono-letters {
+  position: relative;
+  width: 32px;
+  height: 26px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  color: var(--accent);
+}
+.mono-letters span {
   position: absolute;
-  inset: auto 6px 5px 6px;
-  height: 3px;
-  border-radius: 2px;
-  background: repeating-linear-gradient(90deg, var(--on-accent) 0 5px, transparent 5px 10px);
-  opacity: .65;
+  font-size: 16px;
+}
+.mono-letters .l-a {
+  top: 0;
+  left: 2px;
+}
+.mono-letters .l-s {
+  top: 4px;
+  left: 10px;
+  z-index: 2;
+}
+.mono-letters .l-b {
+  top: 9px;
+  left: 18px;
+}
+.mono-sub {
+  font-family: var(--font-body);
+  font-size: 6px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  font-weight: 800;
+  margin-top: 1px;
+  text-transform: uppercase;
 }
 .logo-text { font-size: 19px; line-height: 1; }
 .logo-text small {
