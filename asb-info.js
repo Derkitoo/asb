@@ -5,7 +5,7 @@
   const defaults = {
     phone: "09 55 46 90 61",
     phoneSecondary: "07 82 82 29 03",
-    email: "abs.compagnie@gmail.com",
+    email: "asb.compagnie@gmail.com",
     address: "53 Bd du Général Leclerc de Hauteclocque - 93260 Les Lilas",
     addressShort: "53 Bd du Général Leclerc, Les Lilas",
     successRate: "83",

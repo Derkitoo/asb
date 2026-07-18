@@ -4,7 +4,7 @@
 //  ════════════════════════════════════════════════════════════
 
 // ← Optionnel : Mets l'email de l'auto-école ici pour recevoir une alerte par mail
-var EMAIL_ASB = "abs.compagnie@gmail.com"; 
+var EMAIL_ASB = "asb.compagnie@gmail.com"; 
 
 var ENTETES = [
   'Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Permis souhaité', 'Message', 'Statut'
